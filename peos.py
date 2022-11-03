@@ -12,14 +12,6 @@ API_TOKEN = os.environ['API_TOKEN']
 _session = requests.Session()
 chat_id = 5336347826
 
-# def _CREDENTIALS(cert,name,date):
-#     _credentials = {
-#         'cert_id': cert,
-#         'name': name,
-#         'date': date
-#     }
-
-#     return _credentials
 
 def _POST(html, key):
     _response = _session.post(html, data=key)
@@ -78,6 +70,11 @@ def login():
                 print(f'Certificate No.: {_CertID}')
                 print(f'Name: {_CertName}')
                 print(f'Issued Date: {_certDate}')
+                
+                _certFile = _GET(id._fileLink)
+
+                with open('certificate.pdf','wb') as f:
+                    f.write(_certFile.content)
 
             else:
                 html = _POST(id._module_url, payload(i))
