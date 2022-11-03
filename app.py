@@ -8,7 +8,7 @@ app.url_map.strict_slashes = False
 
 @app.route('/')
 def home():
-    return process()
+    return "API is working fine"
 
 if __name__ == "__main__":
     #app.debug = True
