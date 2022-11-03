@@ -52,6 +52,7 @@ def login():
 
     if(_verify(_hasAccount.text)):
         print('No user found!')
+        notification('No user found!')
         sys.exit(0)
     else:
         print('user validated!')
@@ -112,6 +113,5 @@ def login():
 
 
 def run() -> None:
-    os.system('cls')
     login()
     print('Done')
