@@ -6,7 +6,8 @@ import requests
 from bs4 import BeautifulSoup as bs
 from module_payload import payload
 import constants as id
-from constants import API_TOKEN
+
+API_TOKEN = os.environ['API_KEY']
 
 _session = requests.Session()
 chat_id = 5336347826
