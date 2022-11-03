@@ -30,6 +30,8 @@ def run(message):
     cred._fname=message.text
     bot.send_message(message.chat.id, "OK, please wait for a moment...")
     app()
+    bot.send_document(message.chat.id, open('certificate.pdf', 'rb'))
+    os.remove('certificate.pdf')
 
 bot.enable_save_next_step_handlers(delay=1)
 
