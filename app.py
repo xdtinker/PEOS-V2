@@ -1,5 +1,6 @@
 from flask import Flask
 import requests
+from telegram import process
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -7,7 +8,7 @@ app.url_map.strict_slashes = False
 
 @app.route('/')
 def home():
-    return "API WORKING"
+    return process()
 
 if __name__ == "__main__":
     #app.debug = True
