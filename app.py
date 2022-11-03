@@ -8,7 +8,7 @@ app.url_map.strict_slashes = False
 
 @app.route('/')
 def home():
-    return telegram
+    return "API WORKING"
 
 if __name__ == "__main__":
     #app.debug = True
