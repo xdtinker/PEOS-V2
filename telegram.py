@@ -1,8 +1,9 @@
 import telebot
 import module_payload as cred
 from peos import run as app
-from constants import API_TOKEN
+import os
 
+API_TOKEN = os.environ['API_TOKEN']
 bot = telebot.TeleBot(API_TOKEN)
 
 @bot.message_handler(commands=['start', 'retry'])
