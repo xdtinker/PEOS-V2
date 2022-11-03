@@ -1,7 +1,9 @@
 import telebot
 import module_payload as cred
 from peos import run as app
-from constants import API_TOKEN
+
+
+API_TOKEN = os.environ['API_KEY']
 
 bot = telebot.TeleBot(API_TOKEN)
 
