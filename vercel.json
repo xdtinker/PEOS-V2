@@ -1,14 +1,13 @@
-{
-    "name": "PEOS API",
-    "version": 2,
-    "builds": [{
-        "src": "./app.py",
-        "use": "@vercel/python"
-    }],
-    "routes": [
+    "name":"PEOS V2",
+    "version":2,
+    "builds": [
         {
-            "src": "/(.*)",
-            "dest": "/"
+            "src": "*py", "use": "@vercel/python"
+        }
+    ],
+    "routes":[
+        {
+            "src":"(.*)", "dest": "app.py"
         }
     ]
 }
