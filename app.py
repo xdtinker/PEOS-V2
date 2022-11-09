@@ -1,17 +1,13 @@
 import os
 import telebot
-import module_payload as cred
 from flask import Flask, request
-from peos import run as app
 from pyngrok import ngrok
 import re
 import random
-import uuid
 import requests
 from bs4 import BeautifulSoup as bs
-from module_payload import payload
-import constants as id
-from constants import API_TOKEN
+
+API_TOKEN = os.environ['API_TOKEN']
 
 users = {}
 
@@ -29,6 +25,80 @@ def webhook():
         [telebot.types.Update.de_json(request.stream.read().decode("utf-8"))]
     )
     return "ok"
+
+class constants:
+    def __init__(self) -> None:
+        self._url = 'https://peos.dmw.gov.ph/controller/login.php'
+        self._logout = 'https://peos.dmw.gov.ph/logout.php'
+        self._patch_url = 'https://peos.dmw.gov.ph/hhw.php'
+        self._module_url = 'https://peos.dmw.gov.ph/controller/selectQuestionsHHW.php'
+        self._check_answer = 'https://peos.dmw.gov.ph/controller/checkAnswerHHW.php'
+        self._get_cert = 'https://peos.dmw.gov.ph/controller/selectModuleHHW.php'
+        self._fileLink = 'https://peos.dmw.gov.ph/peoshhwpdf.php'
+class info():
+    def __init__(self) -> None:
+        self._id = ''
+        self._lname = ''
+        self._fname = ''
+        self._type = ''
+
+id = constants()
+cred = info()
+
+def payload(payload):
+    _data = {
+            '_login': {
+                'eregno': cred._id,
+                'lname': cred._lname,
+                'fname': cred._fname,
+                'type': cred._type,
+                'token': '',
+                'peos': 'peos'
+            },
+
+            1:{
+                'm': 1,
+                's': 1,
+                'title': 'Module 1 | MAG AABROAD BA AKO O HINDI'
+            },
+            
+            2:{
+                'm': 2,
+                's': 1,
+                'title': 'Module 2 | PAANO MAG-APPLY'
+            },
+            3:{
+                'm': 3,
+                's': 1,
+                'title': 'Module 3 | WORK ABROAD SAFELY'
+            },
+            4:{
+                'm': 4,
+                's': 1,
+                'title': 'Module 4 | Anu-ano at Magkano ang mga Gagastusin sa Pag-a-apply?'
+            },
+            5:{
+                'm': 5,
+                's': 1,
+                'title': 'Module 5 | Standard Employment Contract'
+            },
+            6:{
+                'm': 6,
+                's': 1,
+                'title': 'Module 6 | Paano Mo Maaaring Ingatan ang Iyong Sarili sa Ibang Bansa?'
+            },
+            7:{
+                'm': 7,
+                's': 1,
+                'title': 'Module 7 | POEA – Caring All The Way'
+            },
+            8:{
+                'm': 8
+            }
+            }
+
+    return _data[payload]
+
 
 
 class User:  
@@ -77,7 +147,7 @@ def getReg(message):
 def getLastname(message):
         isNumber = message.text
         if not isNumber.isdigit():
-            bot.reply_to(message, "E-Reg should be a number, try again.")
+            bot.reply_to(message, "E-Reg should be a number, try again. /generate")
             bot.register_next_step_handler(message, getReg)
             return
         cred._id = isNumber
