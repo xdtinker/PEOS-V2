@@ -1,13 +1,13 @@
 import os
 import telebot
 from flask import Flask, request
-from pyngrok import ngrok
 import re
 import random
 import requests
 from bs4 import BeautifulSoup as bs
 
 API_TOKEN = os.environ['API_TOKEN']
+https_tunnel = os.environ['WEBHOOK']
 users = {}
 
 bot = telebot.TeleBot(API_TOKEN, parse_mode=None)
@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 bot = telebot.TeleBot(API_TOKEN)
 # bot.delete_webhook()
-bot.set_webhook(url=os.environ['URL'])
+bot.set_webhook(url=https_tunnel)
 @app.route('/', methods=["POST"])
 def webhook():
     bot.process_new_updates(
