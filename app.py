@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 bot = telebot.TeleBot(API_TOKEN)
 # bot.delete_webhook()
-bot.set_webhook(url=os.environ['API_TOKEN'])
+bot.set_webhook(url=os.environ['URL'])
 @app.route('/', methods=["POST"])
 def webhook():
     bot.process_new_updates(
